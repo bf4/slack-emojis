@@ -43,8 +43,10 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('slack', help='name of your slack group.')
-    parser.add_argument('token', help='auth token for slack.')
+    parser.add_argument('slack', help='name of your slack group.',
+            default=os.getenv('SLACK_TEAM'))
+    parser.add_argument('token', help='auth token for slack.',
+            default=os.getenv('SLACK_TOKEN'))
     parser.add_argument('-o', '--output', help='output location of images',
                         default=os.getcwd())
     parser.add_argument('--trample',
