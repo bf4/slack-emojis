@@ -20,7 +20,10 @@ def download_image(url, path):
 
 def reconcile_aliases(image_url, emoji):
     if image_url.startswith('alias:'):
-        image_url = emoji.get(image_url[6:], None)
+        target = emoji.get(image_url[6:], None)
+        if not target:
+            return None
+        image_url = reconcile_aliases(target, emoji)
     return image_url
 
 
