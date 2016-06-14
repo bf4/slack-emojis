@@ -8,7 +8,8 @@ case "$1" in
     ;;
 
     upload-recent)
-    source .env && python upload.py $(git diff HEAD^..HEAD --stat | grep images | awk '{print $1 }' | xargs )
+    REFS_BACK="${REFS_BACK:-1}"
+    source .env && python upload.py $(git diff HEAD~"${REFS_BACK}"..HEAD --stat | grep images | awk '{print $1 }' | xargs )
     ;;
 
     download)
